@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 // import Starred from "../component/Starred/Starred";
 import ComposeMail from "../components/MailBox/ComposeMail";
 import Notification from "../components/UI/Notification";
+import Inbox from "../components/MailBox/Inbox";
 
 const Welcome = () => {
   const [show, setShow] = useState(false);
@@ -58,7 +59,7 @@ const Welcome = () => {
               </div>
               <div className="text-start mt-5">
                 <ButtonGroup className="d-flex h-100 text-light flex-column">
-                  {/* <NavLink to="/welcome/inbox" activeClassName={"bg-success"}>
+                  <NavLink to="/welcome/inbox" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
                       type="checkbox"
@@ -79,7 +80,7 @@ const Welcome = () => {
                         </span>
                       </div>{" "}
                     </ToggleButton>
-                  </NavLink> */}
+                  </NavLink>
                   {/* <NavLink to="/welcome/sent" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
@@ -167,28 +168,16 @@ const Welcome = () => {
           <Route path="/welcome/composemail">
             <ComposeMail />
           </Route>
-          {/* <Route path="/welcome/inbox" exact>
+          <Route path="/welcome/inbox" exact>
             <Inbox />
           </Route>
-          <Route path="/welcome/trash" exact>
-            <Trash />
-          </Route>
-          <Route path="/welcome/sent" exact>
+          {/* <Route path="/welcome/sent" exact>
             <Sent />
-          </Route>
-          <Route path="/welcome/starred" exact>
-            <Starred />
-          </Route>
-          <Route path="/welcome/starred/:messageId">
-            <Message />
           </Route>
           <Route path="/welcome/sent/:messageId">
             <Message />
           </Route>
           <Route path="/welcome/inbox/:messageId">
-            <Message />
-          </Route>
-          <Route path="/welcome/trash/:messageId">
             <Message />
           </Route> */}
         </Col>

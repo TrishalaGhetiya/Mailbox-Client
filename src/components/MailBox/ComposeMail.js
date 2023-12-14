@@ -1,17 +1,19 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
-import { Editor, EditorState } from "react-draft-wysiwyg";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../store/authSlice";
 import { addToInbox } from "../../store/mailSlice";
+import { EditorState } from "draft-js";
 
 const ComposeMail = () => {
   const toRef = useRef();
   const subjectRef = useRef();
   const mailSender = useSelector((state) => state.auth.email);
   const email = mailSender.replace(/[.]/g, "");
-  const [editorState, setEditorState] = useState("");
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -94,11 +96,10 @@ const ComposeMail = () => {
         </InputGroup>
         <Form.Group className="mb-3" controlId="textEditor">
           <Editor
-            toolbarClassName="py-3 border-bottom bg-light"
-            wrapperClassName="card mt-3"
-            editorClassName="card-body pt-0"
-            editorStyle={{ minHeight: "15rem" }}
             editorState={editorState}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
             onEditorStateChange={handleEditorStateChange}
           />
         </Form.Group>
