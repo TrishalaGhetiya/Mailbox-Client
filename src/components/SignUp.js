@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "./UI/Notification";
 import { login, showNotification } from "../store/authSlice";
 import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const SignUp = (props) => {
+    const history = useHistory();
   const apiKey = useSelector((state) => state.auth.apiKey);
   const { message, variant } = useSelector((state) => state.auth.notification);
   const dispatch = useDispatch();
@@ -46,7 +48,7 @@ const SignUp = (props) => {
         if (signIn) {
           dispatch(login({ idToken: data.idToken, email: data.email }));
           console.log("LoggedIn successfully");
-          //history.replace("/welcome/inbox");
+          history.replace("/welcome");
         } else {
           emailInputRef.current.value = "";
           passwordInputRef.current.value = "";

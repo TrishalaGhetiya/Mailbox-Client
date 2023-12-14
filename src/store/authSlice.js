@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-require('dotenv').config()
 
 const initialAuthState = {
   isAuthenticated: localStorage.getItem("isAuthenticated"),
   idToken: localStorage.getItem("idToken"),
   email: localStorage.getItem("email"),
-  apiKey: process.env.API_KEY,
+  apiKey: "AIzaSyBaMjEyYa1-VQ3dRX6GfB9u_vd7uM8God4",
   notification: {
     message: null,
     variant: null,

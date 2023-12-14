@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Welcome = (props) => {
   return (
-    <>   
+    <> 
+    <p>Welcome to mailbox client</p>  
     </>
   );
 };
