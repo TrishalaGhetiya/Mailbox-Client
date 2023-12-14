@@ -23,7 +23,7 @@ const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
       {!isAuthenticated ? (
         <Redirect from="*" to="/auth" />
       ) : (
-        <Redirect from="*" to="/welcome" />
+        <Redirect from="*" to="/welcome/inbox" />
       )}
     </Switch>
   );

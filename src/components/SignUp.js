@@ -48,7 +48,7 @@ const SignUp = (props) => {
         if (signIn) {
           dispatch(login({ idToken: data.idToken, email: data.email }));
           console.log("LoggedIn successfully");
-          history.replace("/welcome");
+          history.replace("/welcome/inbox");
         } else {
           emailInputRef.current.value = "";
           passwordInputRef.current.value = "";
