@@ -20,7 +20,7 @@ const Inbox = () => {
   const filteredMails = mails.filter(
     (mail) => mail.trashed === false && mail.recipient === email
   );
-console.log(filteredMails);
+
   const isDeleteEnabled = filteredMails.some((mail) => mail.isChecked);
 
   const onDeleteHandler = async () => {

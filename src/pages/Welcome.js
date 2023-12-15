@@ -9,10 +9,7 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 
-// import Sent from "../component/Sent/Sent";
 import { useSelector } from "react-redux";
-// import Trash from "../component/Trash/Trash";
-// import Starred from "../component/Starred/Starred";
 import ComposeMail from "../components/MailBox/ComposeMail";
 import Notification from "../components/UI/Notification";
 import Inbox from "../components/MailBox/Inbox";
@@ -36,7 +33,6 @@ const Welcome = () => {
       unread++;
     }
   });
-  console.log(unread);
 
   const onClickHandler = () => {
     setShow(false);
@@ -150,7 +146,7 @@ const Welcome = () => {
                 onClick={handleShow}
                 style={{ cursor: "pointer" }}
                 className="bi ps-2 bi-justify fs-2 mt-1"
-              ></i>
+              >Click</i>
               <i className="bi fs-2 text-danger ps-2 bi-envelope-at-fill">
                 {" "}
                 <span className="fs-6 fw-bold">Mail Box Client</span>

@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import Welcome from "./pages/Welcome";
-
 import { addToInbox, clearInbox } from "./store/mailSlice";
 import useAxiosFetch from "./Hooks/useAxiosFetch";
 import SignUp from "./components/userAuthentication/SignUp";
@@ -21,7 +20,7 @@ const recipientMail = useSelector((state) => state.auth.email);
   const url2 = `https://react-http-ff156-default-rtdb.firebaseio.com/sent-emails/${email}.json`;
 
   const urls = [url1, url2];
-
+  
   useEffect(() => {
     const onSuccess = (responses) => {
       const receivedMails = responses[0]?.data;
@@ -52,7 +51,6 @@ const recipientMail = useSelector((state) => state.auth.email);
     if (recipientMail) {
       fetchMails(urls, "GET", null, onSuccess);
     }
-
     return () => {
       dispatch(clearInbox());
     };
@@ -96,9 +94,9 @@ const recipientMail = useSelector((state) => state.auth.email);
       <Route path="/" exact>
         <Redirect to="/auth" />
       </Route>
-      <Route path="/auth">
+      {!isAuthenticated && <Route path="/auth">
         <SignUp />
-      </Route>
+      </Route>}
       {isAuthenticated && (
         <Route path="/welcome">
           <Welcome />
