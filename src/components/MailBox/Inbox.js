@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useUnselect from "../Hooks/useUnselect";
-import Selector from "./Selector";
+
+
 import LoadingSpinner from "../UI/LoadingSpinner";
 import EmptyMessage from "../UI/EmptyMessage";
 import MailListItems from "./MailListItems";
@@ -9,6 +9,8 @@ import axios from "axios";
 import { Button, ListGroup } from "react-bootstrap";
 import { moveFromInbox } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
+import useUnselect from "../../Hooks/useUnselect";
+import Selector from "./Selector";
 
 const Inbox = () => {
   const mails = useSelector((state) => state.mail.mails);

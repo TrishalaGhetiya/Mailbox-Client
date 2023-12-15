@@ -3,8 +3,9 @@ import SignUp from "./userAuthentication/SignUp";
 import { Redirect, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import Welcome from "./pages/Welcome";
-import useAxiosFetch from "./components/Hooks/useAxiosFetch";
+
 import { addToInbox, clearInbox } from "./store/mailSlice";
+import useAxiosFetch from "./Hooks/useAxiosFetch";
 
 function App() {
 const isAuthenticated = useSelector(state => state.auth.isAuthenticated);

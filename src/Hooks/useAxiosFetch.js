@@ -2,7 +2,8 @@
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useCallback } from "react";
-import { setMailsLoading } from "../../store/mailSlice";
+import { setMailsLoading } from "../store/mailSlice";
+
 
 const useAxiosFetch = () => {
   const dispatch = useDispatch();

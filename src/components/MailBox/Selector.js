@@ -52,20 +52,6 @@ const Selector = (props) => {
       >
         Unread
       </Dropdown.Item>
-      <Dropdown.Item
-        as={"button"}
-        onClick={() => selectHandler("starred")}
-        eventKey="5"
-      >
-        Starred
-      </Dropdown.Item>
-      <Dropdown.Item
-        as={"button"}
-        onClick={() => selectHandler("unstarred")}
-        eventKey="6"
-      >
-        Unstarred
-      </Dropdown.Item>
     </SplitButton>
   );
 };

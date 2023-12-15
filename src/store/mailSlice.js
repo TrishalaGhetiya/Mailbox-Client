@@ -41,14 +41,7 @@ const mailSlice = createSlice({
             isChecked: mail.hasRead === (selector === "read"),
           };
         });
-      } else if (selector === "starred" || selector === "unstarred") {
-        state.mails = state.mails.map((mail) => {
-          return {
-            ...mail,
-            isChecked: mail.starred === (selector === "starred"),
-          };
-        });
-      }
+      } 
     },
     moveFromInbox: (state, action) => {
       const { move, email } = action.payload;
@@ -74,17 +67,6 @@ const mailSlice = createSlice({
         return mail;
       });
     },
-    moveFromStarred: (state, action) => {
-      state.mails = state.mails.map((mail) => {
-        if (mail.isChecked && mail.starred === true) {
-          return {
-            ...mail,
-            trashed: action.payload === "toTrash",
-          };
-        }
-        return mail;
-      });
-    },
     moveToTrash: (state, action) => {
       state.mails = state.mails.map((mail) => {
         if (mail.id === action.payload) {
@@ -101,18 +83,12 @@ const mailSlice = createSlice({
       const mailItem = state.mails.find((mail) => mail.id === id);
       mailItem.hasRead = true;
     },
-    toggleStarred: (state, action) => {
-      const { id } = action.payload;
-      const mailItem = state.mails.find((mail) => mail.id === id);
-      mailItem.starred = !mailItem.starred;
-    },
     clearInbox: (state) => {
       state.mails = [];
     },
     setMailsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-
     deleteForever: (state, action) => {
       const { id } = action.payload;
       state.mails = state.mails.filter((mail) => mail.id !== id);
@@ -132,9 +108,7 @@ export const {
   clearInbox,
   setMailsLoading,
   moveToTrash,
-  toggleStarred,
   deleteForever,
   emptyTrash,
-  moveFromStarred,
 } = mailSlice.actions;
 export default mailSlice.reducer;

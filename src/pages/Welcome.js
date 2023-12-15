@@ -18,6 +18,7 @@ import Notification from "../components/UI/Notification";
 import Inbox from "../components/MailBox/Inbox";
 import Message from "../components/MailBox/Message";
 import Logout from "../userAuthentication/Logout";
+import Trash from "../components/Trash/Trash";
 
 const Welcome = () => {
   const [show, setShow] = useState(false);
@@ -109,7 +110,7 @@ const Welcome = () => {
                       Compose
                     </ToggleButton>
                   </NavLink>
-                  {/* <NavLink to="/welcome/trash" activeClassName={"bg-success"}>
+                  <NavLink to="/welcome/trash" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
                       type="checkbox"
@@ -119,7 +120,7 @@ const Welcome = () => {
                     >
                       <i className="fs-4 pe-2 text-info bi bi-trash3"></i> Trash
                     </ToggleButton>
-                  </NavLink> */}
+                  </NavLink>
                   {/* <NavLink to="/welcome/starred" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
@@ -134,9 +135,9 @@ const Welcome = () => {
                   </NavLink> */}
                 </ButtonGroup>
               </div>
-              {/* <div className="mt-auto d-lg-none ms-3">
+              <div className="mt-auto d-lg-none ms-3">
                 <Logout />
-              </div> */}
+              </div>
             </Offcanvas.Body>
           </Offcanvas>
           <div className="mt-auto d-none d-lg-block ms-4">
@@ -172,6 +173,9 @@ const Welcome = () => {
           <Route path="/welcome/inbox" exact>
             <Inbox />
           </Route>
+          <Route path="/welcome/trash" exact>
+            <Trash />
+          </Route>
           {/* <Route path="/welcome/sent" exact>
             <Sent />
           </Route>
@@ -179,6 +183,9 @@ const Welcome = () => {
             <Message />
           </Route> */}
           <Route path="/welcome/inbox/:messageId">
+            <Message />
+          </Route>
+          <Route path="/welcome/trash/:messageId">
             <Message />
           </Route>
         </Col>
