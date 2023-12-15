@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import SignUp from "./components/SignUp";
+import SignUp from "./userAuthentication/SignUp";
 import { Redirect, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import Welcome from "./pages/Welcome";

@@ -8,9 +8,7 @@ import {
   Container,
   Offcanvas,
 } from "react-bootstrap";
-// import Inbox from "../component/Mailbox/Inbox";
-// import Message from "../component/Mailbox/Message";
-// import Logout from "../component/userAuth/Logout";
+
 // import Sent from "../component/Sent/Sent";
 import { useSelector } from "react-redux";
 // import Trash from "../component/Trash/Trash";
@@ -18,6 +16,8 @@ import { useSelector } from "react-redux";
 import ComposeMail from "../components/MailBox/ComposeMail";
 import Notification from "../components/UI/Notification";
 import Inbox from "../components/MailBox/Inbox";
+import Message from "../components/MailBox/Message";
+import Logout from "../userAuthentication/Logout";
 
 const Welcome = () => {
   const [show, setShow] = useState(false);
@@ -33,6 +33,7 @@ const Welcome = () => {
       unread++;
     }
   });
+  console.log(unread);
 
   const onClickHandler = () => {
     setShow(false);
@@ -138,9 +139,9 @@ const Welcome = () => {
               </div> */}
             </Offcanvas.Body>
           </Offcanvas>
-          {/* <div className="mt-auto d-none d-lg-block ms-4">
+          <div className="mt-auto d-none d-lg-block ms-4">
             <Logout />
-          </div> */}
+          </div>
         </Col>
         <Col style={{ maxHeight: "100vh" }} className="overflow-auto">
           {message && (
@@ -176,10 +177,10 @@ const Welcome = () => {
           </Route>
           <Route path="/welcome/sent/:messageId">
             <Message />
-          </Route>
+          </Route> */}
           <Route path="/welcome/inbox/:messageId">
             <Message />
-          </Route> */}
+          </Route>
         </Col>
       </Row>
     </Container>
