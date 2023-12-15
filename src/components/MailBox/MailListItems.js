@@ -6,6 +6,7 @@ import { setRead } from "../../store/mailSlice";
 import useAxiosFetch from "../../Hooks/useAxiosFetch";
 
 const MailListItems = (props) => {
+  const isSent = props.isSent;
   const { mail } = props;
   const email = useSelector((state) => state.auth.email);
   const senderMail = email.replace(/[.]/g, "");
@@ -20,7 +21,6 @@ const MailListItems = (props) => {
     mail.sender === email
       ? `https://react-http-ff156-default-rtdb.firebaseio.com/sent-emails/${senderMail}/${mail.id}.json`
       : `https://react-http-ff156-default-rtdb.firebaseio.com/emails/${mail.id}.json`;
-
 
   const onClickHandler = () => {
     dispatch(setChecked({ id: null, selector: "none" }));
@@ -76,7 +76,7 @@ const MailListItems = (props) => {
                   mail.hasRead ? "invisible" : ""
                 } bi-record-fill text-primary pe-1`}
               ></i>
-              {mail.sender}
+              {isSent ? `${mail.recipient}` : `${mail.sender}`}
             </p>
           </div>{" "}
         </Col>

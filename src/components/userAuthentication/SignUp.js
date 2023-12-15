@@ -8,10 +8,12 @@ import {
   Row,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Notification from "../components/UI/Notification";
-import { login, showNotification } from "../store/authSlice";
+
+
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Notification from "../UI/Notification";
+import { login, showNotification } from "../../store/authSlice";
 
 const SignUp = (props) => {
     const history = useHistory();

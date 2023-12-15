@@ -17,8 +17,10 @@ import ComposeMail from "../components/MailBox/ComposeMail";
 import Notification from "../components/UI/Notification";
 import Inbox from "../components/MailBox/Inbox";
 import Message from "../components/MailBox/Message";
-import Logout from "../userAuthentication/Logout";
+
 import Trash from "../components/Trash/Trash";
+import Logout from "../components/userAuthentication/Logout";
+import Sent from "../components/Sent/Sent";
 
 const Welcome = () => {
   const [show, setShow] = useState(false);
@@ -61,6 +63,21 @@ const Welcome = () => {
               </div>
               <div className="text-start mt-5">
                 <ButtonGroup className="d-flex h-100 text-light flex-column">
+                <NavLink
+                    to="/welcome/composemail"
+                    activeClassName={"bg-success"}
+                  >
+                    <ToggleButton
+                      id="toggle-check"
+                      type="checkbox"
+                      variant="outline-secondary"
+                      className="py-2 w-100 border-0 rounded-0 text-start text-light"
+                      onClick={onClickHandler}
+                    >
+                      <i className="fs-4 pe-2 text-info bi bi-pencil-fill"></i>{" "}
+                      Compose
+                    </ToggleButton>
+                  </NavLink>
                   <NavLink to="/welcome/inbox" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
@@ -83,7 +100,7 @@ const Welcome = () => {
                       </div>{" "}
                     </ToggleButton>
                   </NavLink>
-                  {/* <NavLink to="/welcome/sent" activeClassName={"bg-success"}>
+                  <NavLink to="/welcome/sent" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
                       type="checkbox"
@@ -94,22 +111,8 @@ const Welcome = () => {
                       <i className="fs-4 pe-2 text-info bi bi-send-check-fill"></i>{" "}
                       Sent
                     </ToggleButton>
-                  </NavLink> */}
-                  <NavLink
-                    to="/welcome/composemail"
-                    activeClassName={"bg-success"}
-                  >
-                    <ToggleButton
-                      id="toggle-check"
-                      type="checkbox"
-                      variant="outline-secondary"
-                      className="py-2 w-100 border-0 rounded-0 text-start text-light"
-                      onClick={onClickHandler}
-                    >
-                      <i className="fs-4 pe-2 text-info bi bi-pencil-fill"></i>{" "}
-                      Compose
-                    </ToggleButton>
                   </NavLink>
+                 
                   <NavLink to="/welcome/trash" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
@@ -121,18 +124,6 @@ const Welcome = () => {
                       <i className="fs-4 pe-2 text-info bi bi-trash3"></i> Trash
                     </ToggleButton>
                   </NavLink>
-                  {/* <NavLink to="/welcome/starred" activeClassName={"bg-success"}>
-                    <ToggleButton
-                      id="toggle-check"
-                      type="checkbox"
-                      variant="outline-secondary"
-                      className="rounded-0 w-100 text-start py-2 border-0 text-light"
-                      onClick={onClickHandler}
-                    >
-                      <i className="bi fs-4 pe-2 text-info bi-star-fill"></i>{" "}
-                      Starred
-                    </ToggleButton>
-                  </NavLink> */}
                 </ButtonGroup>
               </div>
               <div className="mt-auto d-lg-none ms-3">
@@ -176,12 +167,12 @@ const Welcome = () => {
           <Route path="/welcome/trash" exact>
             <Trash />
           </Route>
-          {/* <Route path="/welcome/sent" exact>
+          <Route path="/welcome/sent" exact>
             <Sent />
           </Route>
           <Route path="/welcome/sent/:messageId">
             <Message />
-          </Route> */}
+          </Route>
           <Route path="/welcome/inbox/:messageId">
             <Message />
           </Route>
