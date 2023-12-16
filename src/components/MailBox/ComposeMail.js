@@ -37,7 +37,6 @@ const ComposeMail = () => {
       emailContent: editorContent,
       sender: mailSender,
       hasRead: false,
-      trashed: false,
     };
 
     if (emailInfo.recipient !== emailInfo.sender) {
@@ -108,7 +107,7 @@ const ComposeMail = () => {
         <div>
           <Button
             type="submit"
-            variant="danger"
+            variant="success"
             className="bg-gradient shadow rounded-0 px-4"
           >
             {isLoading ? "Sending" : "Send"}

@@ -17,7 +17,7 @@ const MailListItems = (props) => {
   const onCheckHandler = () => {
     dispatch(setChecked({ id: mail.id, selector: "single" }));
   };
-
+ 
   const url =
     mail.sender === email
       ? `https://react-http-ff156-default-rtdb.firebaseio.com/sent-emails/${senderMail}/${mail.id}.json`
@@ -31,7 +31,6 @@ const MailListItems = (props) => {
         dispatch(setRead({ id: mail.id }));
       }
     };
-
     if (!mail.hasRead) {
       modifyMail(
         url,
@@ -51,8 +50,6 @@ const MailListItems = (props) => {
       to={
         location.pathname === "/welcome/inbox"
           ? `/welcome/inbox/${mail.id}`
-          : location.pathname === "/welcome/trash"
-          ? `/welcome/trash/${mail.id}`
           : location.pathname === "/welcome/sent"
       }
       className={`mb-1 py-2 border-bottom ${

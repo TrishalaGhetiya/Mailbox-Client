@@ -50,7 +50,7 @@ const SignUp = (props) => {
         if (signIn) {
           dispatch(login({ idToken: data.idToken, email: data.email }));
           console.log("LoggedIn successfully");
-          history.replace("/welcome/inbox");
+          history.push("/welcome/inbox");
         } else {
           emailInputRef.current.value = "";
           passwordInputRef.current.value = "";
@@ -81,13 +81,13 @@ const SignUp = (props) => {
             <div className="text-center pb-4">
               <h3>
                 Welcome to{" "}
-                <span className="text-danger fst-italic">Mail Box Client </span>
+                <span className="text-success fst-italic">Mail Box Client </span>
               </h3>
               <p>Please Sign Up/Login to continue.</p>
             </div>
             <div
               style={{ maxWidth: "25rem" }}
-              className="text-center bg-danger bg-gradient mx-auto rounded-top py-1"
+              className="text-center bg-success bg-gradient mx-auto rounded-top py-1"
             >
               <i className="bi bi-envelope-at-fill fs-1 text-light"></i>
             </div>
@@ -140,14 +140,14 @@ const SignUp = (props) => {
                 {signIn ? (
                   <Button
                     type="submit"
-                    className={`w-100 mt-2 bg-danger rounded-0 border-0 text-light fw-bold`}
+                    className={`w-100 mt-2 bg-success rounded-0 border-0 text-light fw-bold`}
                   >
                     Login
                   </Button>
                 ) : (
                   <Button
                     type="submit"
-                    className={`w-100 mt-2 bg-danger rounded-0 border-0 text-light fw-bold`}
+                    className={`w-100 mt-2 bg-success rounded-0 border-0 text-light fw-bold`}
                   >
                     Sign Up
                   </Button>

@@ -14,8 +14,6 @@ import ComposeMail from "../components/MailBox/ComposeMail";
 import Notification from "../components/UI/Notification";
 import Inbox from "../components/MailBox/Inbox";
 import Message from "../components/MailBox/Message";
-
-import Trash from "../components/Trash/Trash";
 import Logout from "../components/userAuthentication/Logout";
 import Sent from "../components/Sent/Sent";
 
@@ -25,9 +23,10 @@ const Welcome = () => {
   const email = useSelector((state) => state.auth.email);
   const { message, variant } = useSelector((state) => state.auth.notification);
   const filteredMails = mails.filter(
-    (mail) => mail.recipient === email && mail.trashed === false
+    (mail) => mail.recipient === email
   );
   let unread = 0;
+  
   filteredMails.forEach((mail) => {
     if (!mail.hasRead) {
       unread++;
@@ -54,8 +53,7 @@ const Welcome = () => {
           >
             <Offcanvas.Body className="d-flex flex-column p-lg-2">
               <div className="text-center">
-                <i className="bi bi-envelope-at-fill text-danger fs-1"></i>
-                <p className="ps-2 fs-4 fw-bold text-info">Mail Box Client</p>
+                <p className="ps-2 fs-4 fw-bold text-success">Mail Box Client</p>
               </div>
               <div className="text-start mt-5">
                 <ButtonGroup className="d-flex h-100 text-light flex-column">
@@ -108,18 +106,6 @@ const Welcome = () => {
                       Sent
                     </ToggleButton>
                   </NavLink>
-
-                  <NavLink to="/welcome/trash" activeClassName={"bg-success"}>
-                    <ToggleButton
-                      id="toggle-check"
-                      type="checkbox"
-                      variant="outline-secondary"
-                      className="rounded-0 w-100 text-start py-2 border-0 text-light"
-                      onClick={onClickHandler}
-                    >
-                      <i className="fs-4 pe-2 text-info bi bi-trash3"></i> Trash
-                    </ToggleButton>
-                  </NavLink>
                 </ButtonGroup>
               </div>
               <div className="mt-auto d-lg-none ms-3">
@@ -147,7 +133,7 @@ const Welcome = () => {
                 style={{ cursor: "pointer" }}
                 className="bi ps-2 bi-justify fs-2 mt-1"
               >
-                <i className="bi fs-2 text-danger ps-2 bi-envelope-at-fill">
+                <i className="bi fs-2 text-success ps-2 bi-envelope-at-fill">
                   {" "}
                   <span className="fs-6 fw-bold">Mail Box Client</span>
                 </i>{" "}
@@ -161,9 +147,6 @@ const Welcome = () => {
           <Route path="/welcome/inbox" exact>
             <Inbox />
           </Route>
-          <Route path="/welcome/trash" exact>
-            <Trash />
-          </Route>
           <Route path="/welcome/sent" exact>
             <Sent />
           </Route>
@@ -171,9 +154,6 @@ const Welcome = () => {
             <Message />
           </Route>
           <Route path="/welcome/inbox/:messageId">
-            <Message />
-          </Route>
-          <Route path="/welcome/trash/:messageId">
             <Message />
           </Route>
         </Col>

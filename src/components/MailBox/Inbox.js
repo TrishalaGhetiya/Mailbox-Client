@@ -1,16 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import LoadingSpinner from "../UI/LoadingSpinner";
 import EmptyMessage from "../UI/EmptyMessage";
 import MailListItems from "./MailListItems";
 import axios from "axios";
 import { Button, ListGroup } from "react-bootstrap";
-import { moveFromInbox } from "../../store/mailSlice";
+import { deleteMail } from "../../store/mailSlice";
 import { showNotification } from "../../store/authSlice";
-import useUnselect from "../../Hooks/useUnselect";
-import Selector from "./Selector";
 
 const Inbox = () => {
   const mails = useSelector((state) => state.mail.mails);
@@ -18,7 +15,7 @@ const Inbox = () => {
   const isLoading = useSelector((state) => state.mail.isLoading);
   const email = useSelector((state) => state.auth.email);
   const filteredMails = mails.filter(
-    (mail) => mail.trashed === false && mail.recipient === email
+    (mail) => mail.recipient === email
   );
 
   const isDeleteEnabled = filteredMails.some((mail) => mail.isChecked);
@@ -28,30 +25,27 @@ const Inbox = () => {
       const updatedPromises = filteredMails
         .filter((mail) => mail.isChecked)
         .map((mail) =>
-          axios.put(
-            `https://react-http-ff156-default-rtdb.firebaseio.com/emails/${mail.id}.json`,
-            {
-              ...mail,
-              isChecked: false,
-              trashed: true,
-            }
+          axios.delete(
+            `https://react-http-ff156-default-rtdb.firebaseio.com/emails/${mail.id}.json`
           )
         );
       await Promise.all(updatedPromises);
 
-      dispatch(moveFromInbox({ move: "toTrash", email: email }));
       dispatch(
-        showNotification({ message: "Moved to trash!", variant: "success" })
+        showNotification({
+          message: "Mail deleted",
+          variant: "success",
+        })
       );
+
+      dispatch(deleteMail());
     } catch (error) {
       console.log(error.message);
     }
   };
-  useUnselect(dispatch)
   return (
     <div className="">
       <div className="border-bottom d-flex align-items-center py-2 px-1 mt-5 mt-lg-0">
-        <Selector filteredMails={filteredMails} />
         <div className="ms-auto mx-lg-auto">
           <Button
             variant="danger"
@@ -71,7 +65,7 @@ const Inbox = () => {
           <LoadingSpinner />
         </div>
       ) : filteredMails.length === 0 ? (
-        <EmptyMessage message = "Your inbox is empty!"/>
+        <EmptyMessage message="Your inbox is empty!" />
       ) : (
         <ListGroup variant="flush" className="overflow-auto">
           {filteredMails.map((mail) => (

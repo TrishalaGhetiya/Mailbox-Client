@@ -11,6 +11,8 @@ import { addToInbox, clearInbox } from "./store/mailSlice";
 import useAxiosFetch from "./Hooks/useAxiosFetch";
 import SignUp from "./components/userAuthentication/SignUp";
 
+let initial = true;
+
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const recipientMail = useSelector((state) => state.auth.email);
@@ -19,6 +21,7 @@ function App() {
   const email = isAuthenticated ? recipientMail.replace(/[.]/g, "") : undefined;
   const mails = useSelector((state) => state.mail.mails);
   const dispatch = useDispatch();
+
   const url1 =
     "https://react-http-ff156-default-rtdb.firebaseio.com/emails.json";
   const url2 = `https://react-http-ff156-default-rtdb.firebaseio.com/sent-emails/${email}.json`;
@@ -26,39 +29,42 @@ function App() {
   const urls = [url1, url2];
 
   useEffect(() => {
-    const onSuccess = (responses) => {
-      const receivedMails = responses[0]?.data;
-      const sentMails = responses[1]?.data;
-
-      const inboxMails = receivedMails
-        ? Object.entries(receivedMails)
-            .filter(([key, mail]) => mail.recipient === recipientMail)
-            .map(([key, mail]) => ({
+    if(initial){
+      initial = false;
+      return;
+    }
+      const onSuccess = (responses) => {
+        const receivedMails = responses[0]?.data;
+        const sentMails = responses[1]?.data;
+        const inboxMails = receivedMails
+          ? Object.entries(receivedMails)
+              .filter(([key, mail]) => mail.recipient === recipientMail)
+              .map(([key, mail]) => ({
+                ...mail,
+                id: key,
+                isChecked: false,
+              }))
+          : [];
+  
+        const sentMailItems = sentMails
+          ? Object.entries(sentMails).map(([key, mail]) => ({
               ...mail,
               id: key,
               isChecked: false,
             }))
-        : [];
-
-      const sentMailItems = sentMails
-        ? Object.entries(sentMails).map(([key, mail]) => ({
-            ...mail,
-            id: key,
-            isChecked: false,
-          }))
-        : [];
-
-      const allMails = [...sentMailItems, ...inboxMails];
-      dispatch(addToInbox(allMails));
-    };
-
-    if (recipientMail) {
-      fetchMails(urls, "GET", null, onSuccess);
-    }
-
-    return () => {
-      dispatch(clearInbox());
-    };
+          : [];
+  
+        const allMails = [...sentMailItems, ...inboxMails];
+        dispatch(addToInbox(allMails));
+      };
+  
+      if (recipientMail) {
+        fetchMails(urls, "GET", null, onSuccess);
+      }
+  
+      return () => {
+        dispatch(clearInbox());
+      };
     // eslint-disable-next-line
   }, [recipientMail, dispatch, fetchMails]);
 
