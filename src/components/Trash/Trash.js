@@ -1,10 +1,10 @@
 import { Button, ListGroup } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import ConfirmDelete from "./ConfirmDelete";
-import {
-  moveFromInbox,
-  moveFromSentbox,
-} from "../../store/mailSlice";
+// import {
+//   moveFromInbox,
+//   moveFromSentbox,
+// } from "../../store/mailSlice";
 import { useState } from "react";
 import axios from "axios";
 import { showNotification } from "../../store/authSlice";
@@ -30,41 +30,41 @@ const Trash = () => {
 
   const filteredMails = mails.filter((mail) => mail.trashed);
 
-  const isDeleteEnabled = filteredMails.some((item) => item.isChecked);
+  // const isDeleteEnabled = filteredMails.some((item) => item.isChecked);
 
   const url1 = `https://react-http-ff156-default-rtdb.firebaseio.com/emails`;
   const url2 = `https://react-http-ff156-default-rtdb.firebaseio.com/sent-emails/${senderMail}`;
 
-  const onRestoreHandler = async () => {
-    try {
-      const updatedPromises = filteredMails
-        .filter((mail) => mail.isChecked)
-        .map((mail) =>
-          axios.put(
-            mail.sender === email
-              ? `${url2}/${mail.id}.json`
-              : `${url1}/${mail.id}.json`,
-            {
-              ...mail,
-              isChecked: false,
-              trashed: false,
-            }
-          )
-        );
+  // const onRestoreHandler = async () => {
+  //   try {
+  //     const updatedPromises = filteredMails
+  //       .filter((mail) => mail.isChecked)
+  //       .map((mail) =>
+  //         axios.put(
+  //           mail.sender === email
+  //             ? `${url2}/${mail.id}.json`
+  //             : `${url1}/${mail.id}.json`,
+  //           {
+  //             ...mail,
+  //             isChecked: false,
+  //             trashed: false,
+  //           }
+  //         )
+  //       );
 
-      await Promise.all(updatedPromises);
-      dispatch(
-        showNotification({
-          message: "Restored! ",
-          variant: "success",
-        })
-      );
-      dispatch(moveFromInbox({ move: "toInbox", email: email }));
-      dispatch(moveFromSentbox({ move: "toSentbox", email: email }));
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  //     await Promise.all(updatedPromises);
+  //     dispatch(
+  //       showNotification({
+  //         message: "Restored! ",
+  //         variant: "success",
+  //       })
+  //     );
+  //     dispatch(moveFromInbox({ move: "toInbox", email: email }));
+  //     dispatch(moveFromSentbox({ move: "toSentbox", email: email }));
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   const emptyTrashHandler = async () => {
     try {
@@ -113,7 +113,7 @@ useUnselect(dispatch)
           >
             Empty Trash Now
           </Button>
-          <Button
+          {/* <Button
             disabled={!isDeleteEnabled}
             size="sm"
             variant="danger"
@@ -121,7 +121,7 @@ useUnselect(dispatch)
             onClick={onRestoreHandler}
           >
             Restore
-          </Button>
+          </Button> */}
         </div>
       </div>
       {isLoading ? (

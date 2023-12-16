@@ -38,7 +38,6 @@ const ComposeMail = () => {
       sender: mailSender,
       hasRead: false,
       trashed: false,
-      starred: false,
     };
 
     if (emailInfo.recipient !== emailInfo.sender) {
@@ -66,6 +65,9 @@ const ComposeMail = () => {
 
           dispatch(addToInbox([mailItem]));
           dispatch(showNotification({ message: "Sent", variant: "success" }));
+          toRef.current.value = '';
+          subjectRef.current.value = '';
+          setEditorState(EditorState.createEmpty());
         }
       } catch (error) {
         console.error(error.message);

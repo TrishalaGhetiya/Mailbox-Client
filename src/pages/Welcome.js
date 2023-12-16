@@ -59,7 +59,7 @@ const Welcome = () => {
               </div>
               <div className="text-start mt-5">
                 <ButtonGroup className="d-flex h-100 text-light flex-column">
-                <NavLink
+                  <NavLink
                     to="/welcome/composemail"
                     activeClassName={"bg-success"}
                   >
@@ -108,7 +108,7 @@ const Welcome = () => {
                       Sent
                     </ToggleButton>
                   </NavLink>
-                 
+
                   <NavLink to="/welcome/trash" activeClassName={"bg-success"}>
                     <ToggleButton
                       id="toggle-check"
@@ -146,11 +146,12 @@ const Welcome = () => {
                 onClick={handleShow}
                 style={{ cursor: "pointer" }}
                 className="bi ps-2 bi-justify fs-2 mt-1"
-              >Click</i>
-              <i className="bi fs-2 text-danger ps-2 bi-envelope-at-fill">
-                {" "}
-                <span className="fs-6 fw-bold">Mail Box Client</span>
-              </i>{" "}
+              >
+                <i className="bi fs-2 text-danger ps-2 bi-envelope-at-fill">
+                  {" "}
+                  <span className="fs-6 fw-bold">Mail Box Client</span>
+                </i>{" "}
+              </i>
             </span>
           </div>
 

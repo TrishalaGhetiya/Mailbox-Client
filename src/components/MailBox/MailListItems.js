@@ -13,6 +13,7 @@ const MailListItems = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { fetchData: modifyMail } = useAxiosFetch();
+
   const onCheckHandler = () => {
     dispatch(setChecked({ id: mail.id, selector: "single" }));
   };
@@ -69,7 +70,16 @@ const MailListItems = (props) => {
                 onClick={(e) => e.stopPropagation()}
               />
             </Form>
-
+            {"  "}
+            {!mail.hasRead && <span
+              style={{
+                height: "15px",
+                width: "15px",
+                backgroundColor: 'blue',
+                borderRadius: "50%",
+                display: "inline-block",
+              }}
+            ></span>}
             <p className="fw-bold ps-3 m-0">
               <i
                 className={`bi ${
